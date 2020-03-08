@@ -26,6 +26,8 @@
 
                             <div class="form-group" {{ $errors->has('filename') ? 'has-error' : '' }}>
                                 <label for="filename"></label>
+                                <input name="title" type="text" class="form-control" id="title" placeholder="file Title" required
+                       value="{{ old('title') }}">
                                     <input type="file" name="filename" multiple id="filename" class="form-control">
                                     <span class="text-danger"> {{ $errors->first('filename') }}</span>
                             </div>
@@ -42,5 +44,6 @@
                 </div>
             </div>
         </div>
+    </form>
     </div>
 @endsection

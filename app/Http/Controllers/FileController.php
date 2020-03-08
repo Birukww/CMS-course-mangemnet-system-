@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator,Redirect,Response,Image;
+use Validator,Redirect,Response,File;
 use Illuminate\Support\Facades\Storage;
-Use App\File;
+Use App\course_material;
 Use DB;
 class FileController extends Controller
 {
@@ -53,7 +53,11 @@ class FileController extends Controller
         // file validation
         //$validator = request()->validate(['filename' => 'required|mimes:jpeg,png,jpg,bmp|max:2048']);
         $validator      =   Validator::make($request->all(),
-        ['filename'      =>   'required|mimes:jpeg,png,zip,jpg,bmp,txt,docx,pdf']);
+        ['filename'      =>   'required|mimes:jpeg,png,zip,jpg,bmp,txt,docx,pdf',
+        'title'      =>   'required|',
+        'course_code'      =>   'required'
+        
+        ]);
 
         // $product = new File($request->input());
 
@@ -61,17 +65,26 @@ class FileController extends Controller
         if($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
-        // if validation success
-        if($file   =   $request->file('filename')) {
-        $name      =   time().time().'.'.$file->getClientOriginalExtension();
-        $target_path    =   public_path('/uploads/');
-            if($file->move($target_path, $name)) {
-                // save file name in the database
-                $file   =   File::create(['filename' => $name]);
+               $fileupload = new course_material(); 
+
+               $fileupload->title = $request->input('title');
+               // Set other properties
+               
+               $file = $request->file('filename');
+               $filename = time().time().'.'.$file->getClientOriginalExtension(); 
+               $file->storeAs('/uploads/', $filename);
+               
+               $fileupload->filename = $filename;
+               $fileupload->course_code = $request->input('course_code');
+               $fileupload->description = $request->input('description');
+               
+               
+               $fileupload->save();
             
                 return redirect('/file')->with("success", "File uploaded successfully");
-            }
-        }
+          
+        
+       
     }
     /**
      * Display the specified resource.

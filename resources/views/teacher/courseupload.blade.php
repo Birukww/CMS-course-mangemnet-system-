@@ -1,6 +1,6 @@
 @extends('teachersDashboard')
 @section('content')
-<form  action="/courseupload" method="post">
+
 <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -40,60 +40,83 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">assignment register</h4>
         </div>
-        <form action="">
-          @foreach($errors->all() as $error)
-          <li>{{$error}}</li>
-        @endforeach
-        <div class="modal-body">
- 
-              <div class="form-group">
-              <label class="col-md-3 control-label" for="birthPlace">title</label>
-              <div class="col-md-6">
-                <input id="" name="" type="text" placeholder="" class="form-control" value=""></div>
-              </div>
-              <br>
-              <br>
-              <div class="form-group">
-              <label class="col-md-3 control-label" for="birthPlace">course_code</label>
-              <div class="col-md-6">
-                <input id="" name="" type="text" placeholder="" class="form-control" value=""></div>
-              </div>
-              <br>
-              <br>
-             
-                <div class="form-group">
-                <label class="col-md-3 control-label" for="dob">user_id</label>
-                <div class="col-md-6">
-                  <input id="" name="" type="text" placeholder="" class="form-control" value=""></div>
-                </div>
-                <br>
-                <br>
-                <div class="form-group">
-                <label class="col-md-3 control-label" for="dob">section</label>
-                <div class="col-md-6">
-                  <input id="" name="" type="text" placeholder="" class="form-control" value=""></div>
-                </div>
-                  <div class="form-group">
-                        <label class="control-label">select file</label>
-                        <div>
-                            <input type="file" class="form-control input-lg" name="password">
-                        </div>
-                    </div>            
- 
-      <tr>
-        <div class="modal-footer">
-          <button type="button" id="edit" class="btn btn-primary">edit</button>
         
-       
-          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
-        </div>
-        <a href="#" class="create-modal">
-           <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">submit</button>
-               </a>
-      </tr>
-      </div>
-    </form>
+          <form action="{{url('/file/upload')}}" method="post" enctype="multipart/form-data">
+            <div class="modal-body">
+    
+                        <!-- print success message after file upload  -->
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success">
+                                        {{ Session::get('success') }}
+                                        @php
+                                            Session::forget('success');
+                                        @endphp
+                                    </div>
+                                @endif
+    
+
+                                <div class="form-group">
+                                  <label class="col-md-3 control-label" for="">title</label>
+                                  <div class="col-md-6">
+                                    <input id="title" name="title" type="text" placeholder="" class="form-control" value=""></div>
+                                  </div>
+
+                                  <br>
+                                  <br>
+                                  <div class="form-group">
+                                    <label class="col-md-3 control-label" for="">course_code</label>
+                                    <div class="col-md-6">
+                                      <input id="course_code" name="course_code" type="text" placeholder="" class="form-control" value=""></div>
+                                    </div>
+  
+                                    <br>
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="">description</label>
+                                        <div class="col-md-6">
+                                          <input id="description" name="description" type="text" placeholder="" class="form-control" value=""></div>
+                                        </div>
       
+                                        <br>
+                                        <br>
+
+
+                                <div class="form-group" {{ $errors->has('filename') ? 'has-error' : '' }}>
+                                    <label for="filename"></label>
+                                   
+                                        <input type="file" name="filename" multiple id="filename" class="form-control">
+                                        <span class="text-danger"> {{ $errors->first('filename') }}</span>
+                                </div>
+                                <tr>
+                                    <div class="modal-footer">
+                                      <button type="button" id="edit" class="btn btn-primary">edit</button>
+                                    
+                                   
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                                    </div>
+                                    <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">submit</button>
+                              
+                        
+                                
+                            
+
+                            </tr>
+                             
+                            {{ csrf_field() }}
+                     
+            </div>
+        </form>
+    
+ 
+              
+              
+                
+              
+      
+      
+   
+  </div> 
     </div>
   </div>
   
@@ -106,8 +129,7 @@
                 <tr>
                     <th>title</th>
                     <th>course_code</th> 
-                    <th>user_id</th>
-                    <th>section</th>
+                    <th>description</th>
                     <th>edit</th>
                     <th class="col-xs-4">delete</th>
                 </tr>

@@ -14,6 +14,9 @@ Route::get('/',function(){
 	return view('welcome');
 });
 
+Route::get('/teachers','pagesController@teacher');
+Route::get('/courseupload','pagesController@courseupload');
+Route::post('/courseupload/store','pagesController@store');
 Route::get('/hello','customersController@index');
 Route::get('/about','customersController@about');
 Route::get('/services','customersController@services');
