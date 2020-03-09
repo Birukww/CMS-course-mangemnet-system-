@@ -41,9 +41,10 @@
           <h4 class="modal-title">assignment register</h4>
         </div>
         
-          <form action="{{url('/file/upload')}}" method="post" enctype="multipart/form-data">
+        <form action="{{url('/file/upload')}}" method="post" enctype="multipart/form-data">
             <div class="modal-body">
-    
+                
+                        
                         <!-- print success message after file upload  -->
                                 @if(Session::has('success'))
                                     <div class="alert alert-success">
@@ -53,60 +54,59 @@
                                         @endphp
                                     </div>
                                 @endif
-    
+
 
                                 <div class="form-group">
-                                  <label class="col-md-3 control-label" for="">title</label>
-                                  <div class="col-md-6">
-                                    <input id="title" name="title" type="text" placeholder="" class="form-control" value=""></div>
-                                  </div>
-
-                                  <br>
-                                  <br>
-                                  <div class="form-group">
-                                    <label class="col-md-3 control-label" for="">course_code</label>
+                                    <label class="col-md-3 control-label" for="">title</label>
                                     <div class="col-md-6">
-                                      <input id="course_code" name="course_code" type="text" placeholder="" class="form-control" value=""></div>
+                                      <input id="title" name="title" type="text" placeholder="" class="form-control" value=""></div>
                                     </div>
-  
                                     <br>
                                     <br>
-
+    
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label" for="">description</label>
+                                        <label class="col-md-3 control-label" for="course_code">course_code</label>
                                         <div class="col-md-6">
-                                          <input id="description" name="description" type="text" placeholder="" class="form-control" value=""></div>
+                                          <input id="course_code" name="course_code" type="text" placeholder="" class="form-control" value=""></div>
                                         </div>
-      
                                         <br>
                                         <br>
-
+    
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="description">description</label>
+                                            <div class="col-md-6">
+                                              <input id="description" name="description" type="text" placeholder="" class="form-control" value=""></div>
+                                            </div>
+                                            <br>
+                                            <br>
+        
 
                                 <div class="form-group" {{ $errors->has('filename') ? 'has-error' : '' }}>
                                     <label for="filename"></label>
-                                   
+                                  
                                         <input type="file" name="filename" multiple id="filename" class="form-control">
                                         <span class="text-danger"> {{ $errors->first('filename') }}</span>
-                                </div>
-                                <tr>
-                                    <div class="modal-footer">
-                                      <button type="button" id="edit" class="btn btn-primary">edit</button>
-                                    
-                                   
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
-                                    </div>
-                                    <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">submit</button>
-                              
-                        
-                                
-                            
+                                </div>  
+                      
+    
 
-                            </tr>
-                             
+
+                        <tr>
+                            <div class="modal-footer">
+                              <button type="button" id="edit" class="btn btn-primary">edit</button>
+                            
+                           
+                              <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                            </div>
+                            
+                               <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">submit</button>
                             {{ csrf_field() }}
-                     
-            </div>
+                        </tr>
+                        </div>
+                    
+            
         </form>
+    
     
  
               

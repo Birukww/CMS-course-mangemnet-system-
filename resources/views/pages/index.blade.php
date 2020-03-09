@@ -4,7 +4,7 @@
 <div class="container mt-5 border p-3">
     <div class="row pb-5">
         <div class="col-xl-12">
-            <a href=" {{url('file/upload')}} " class="btn btn-success btn-sm float-right"> Add More </a>
+            <a href=" {{url('teachers')}} " class="btn btn-success btn-sm float-right"> Add More </a>
         </div>
     </div>
 

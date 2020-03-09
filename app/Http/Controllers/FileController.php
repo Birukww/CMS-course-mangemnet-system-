@@ -18,7 +18,7 @@ class FileController extends Controller
     public function index()
     {
         // fetch all the images
-        $files  =   File::all();
+        $files  =   course_material::all();
         return view('pages.index', compact('files'));
     }
     /*public function dindex() {
@@ -54,8 +54,8 @@ class FileController extends Controller
         //$validator = request()->validate(['filename' => 'required|mimes:jpeg,png,jpg,bmp|max:2048']);
         $validator      =   Validator::make($request->all(),
         ['filename'      =>   'required|mimes:jpeg,png,zip,jpg,bmp,txt,docx,pdf',
-        'title'      =>   'required|',
-        'course_code'      =>   'required'
+        'title'      =>   'required',   'course_code'      =>   'required'
+       
         
         ]);
 
@@ -75,8 +75,8 @@ class FileController extends Controller
                $file->storeAs('/uploads/', $filename);
                
                $fileupload->filename = $filename;
-               $fileupload->course_code = $request->input('course_code');
-               $fileupload->description = $request->input('description');
+              $fileupload->course_code = $request->input('course_code');
+              $fileupload->description = $request->input('description');
                
                
                $fileupload->save();
